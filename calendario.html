@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Calendário do Amor ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, #ff0000, #000000);
+      font-family: 'Segoe UI', sans-serif;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    h1 {
+      margin-top: 20px;
+      font-size: 28px;
+      text-align: center;
+    }
+
+    /* Botão lateral igual ao do quiz */
+    .home-button {
+      position: fixed;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: #fff;
+      color: #ff0000;
+      font-size: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: transform 0.2s ease, background-color 0.2s ease;
+      z-index: 1000;
+    }
+
+    .home-button:hover {
+      transform: translateY(-50%) scale(1.1);
+      background-color: #ffe5e5;
+    }
+
+    .calendar-container {
+      background: #fff;
+      color: #333;
+      border-radius: 15px;
+      padding: 15px;
+      margin-top: 50px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+      width: fit-content;
+      max-width: 95%;
+      overflow-x: auto;
+    }
+
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .calendar-header button {
+      background: #ff0000;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .calendar-header button:hover {
+      background: #cc0000;
+    }
+
+    .calendar-header h2 {
+      margin: 0;
+      font-size: 18px;
+      text-align: center;
+      flex: 1;
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 40px);
+      gap: 5px;
+      justify-content: center;
+    }
+
+    .day, .weekday {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      border-radius: 50%;
+      position: relative;
+    }
+
+    .weekday {
+      font-weight: bold;
+      color: #555;
+      border-radius: 0;
+      background: none;
+    }
+
+    .day.empty {
+      background: transparent;
+    }
+
+    .day.disabled {
+      color: #bbb;
+    }
+
+    .day.past {
+      background: #ff0000;
+      color: #fff;
+    }
+
+    .day.future {
+      border: 1px solid #ff0000;
+      color: #000;
+    }
+
+    .legend {
+      margin-top: 15px;
+      font-size: 13px;
+      color: #fff;
+      background: rgba(0,0,0,0.3);
+      padding: 10px;
+      border-radius: 10px;
+      max-width: 280px;
+      text-align: left;
+    }
+
+    .legend p {
+      margin: 5px 0;
+    }
+
+    .legend span {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+
+    .red { background: #ff0000; }
+    .partial {
+      background: conic-gradient(#ff0000 50%, #f8f8f8 0);
+      border: 1px solid #ff0000;
+    }
+    .disabled-circle { background: #bbb; }
+
+    /* Responsividade */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 22px;
+      }
+
+      .home-button {
+        width: 50px;
+        height: 50px;
+        font-size: 22px;
+        left: 10px;
+      }
+
+      .calendar-container {
+        padding: 10px;
+      }
+
+      .calendar-grid {
+        grid-template-columns: repeat(7, 32px);
+        gap: 4px;
+      }
+
+      .day, .weekday {
+        width: 32px;
+        height: 32px;
+        font-size: 12px;
+      }
+
+      .calendar-header h2 {
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .calendar-grid {
+        grid-template-columns: repeat(7, 28px);
+        gap: 3px;
+      }
+
+      .day, .weekday {
+        width: 28px;
+        height: 28px;
+        font-size: 11px;
+      }
+
+      .calendar-header h2 {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Botão igual ao do quiz -->
+  <a href="menu.html" class="home-button">🏠</a>
+
+  <h1>Calendário do Amor 💘</h1>
+
+  <div class="calendar-container">
+    <div class="calendar-header">
+      <button onclick="prevMonth()">◀</button>
+      <h2 id="monthYear"></h2>
+      <button onclick="nextMonth()">▶</button>
+    </div>
+    <div class="calendar-grid" id="calendar"></div>
+  </div>
+
+  <div class="legend">
+    <p><span class="red"></span> Dias que nosso amor esteve completo ❤️</p>
+    <p><span class="partial"></span> Dias que ainda vão se completar 🌹</p>
+    <p><span class="disabled-circle"></span> Antes do nosso início (09/12/2023) 🌙</p>
+  </div>
+
+  <script>
+    const startDate = new Date(2023, 11, 9); // 09/12/2023
+    const today = new Date();
+    const maxFuture = new Date(today);
+    maxFuture.setFullYear(today.getFullYear() + 2);
+
+    let currentYear = today.getFullYear();
+    let currentMonth = today.getMonth();
+
+    const monthNames = [
+      "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+      "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+    ];
+
+    function renderCalendar() {
+      const calendarEl = document.getElementById("calendar");
+      const monthYearEl = document.getElementById("monthYear");
+      calendarEl.innerHTML = "";
+
+      const firstDay = new Date(currentYear, currentMonth, 1);
+      const lastDay = new Date(currentYear, currentMonth + 1, 0);
+
+      monthYearEl.textContent = `${monthNames[currentMonth]} ${currentYear}`;
+
+      // Dias da semana
+      const weekdays = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
+      weekdays.forEach(d => {
+        const div = document.createElement("div");
+        div.textContent = d;
+        div.className = "weekday";
+        calendarEl.appendChild(div);
+      });
+
+      // Espaços em branco antes do primeiro dia
+      for (let i = 0; i < firstDay.getDay(); i++) {
+        const div = document.createElement("div");
+        div.className = "day empty";
+        calendarEl.appendChild(div);
+      }
+
+      // Dias do mês
+      for (let d = 1; d <= lastDay.getDate(); d++) {
+        const current = new Date(currentYear, currentMonth, d);
+        const div = document.createElement("div");
+        div.className = "day";
+        div.textContent = d;
+
+        if (current < startDate) {
+          div.classList.add("disabled");
+        } else if (current <= today) {
+          div.classList.add("past");
+        } else if (current <= maxFuture) {
+          div.classList.add("future");
+
+          // Progresso do círculo no futuro
+          const diffDays = Math.ceil((current - today) / (1000*60*60*24));
+          let percent = 100 - Math.min(diffDays, 100);
+          if (percent < 10) percent = 10;
+
+          div.style.background = `conic-gradient(#ff0000 ${percent}%, #f8f8f8 0)`;
+        } else {
+          div.classList.add("empty");
+          div.textContent = "";
+        }
+
+        calendarEl.appendChild(div);
+      }
+    }
+
+    function prevMonth() {
+      currentMonth--;
+      if (currentMonth < 0) {
+        currentMonth = 11;
+        currentYear--;
+      }
+      renderCalendar();
+    }
+
+    function nextMonth() {
+      currentMonth++;
+      if (currentMonth > 11) {
+        currentMonth = 0;
+        currentYear++;
+      }
+      renderCalendar();
+    }
+
+    renderCalendar();
+  </script>
+</body>
+</html>

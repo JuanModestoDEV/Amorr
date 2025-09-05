@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Nossa história de amor 💘</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="calculator">
+      <div class="status" style="color: rgb(0, 0, 0);">Digite a data em que começamos a namorar oficialmente 💘</div>
+      <div id="display" class="input-display">__/__/____</div>
+      <div class="buttons">
+        <button onclick="addDigit('1')">1</button>
+        <button onclick="addDigit('2')">2</button>
+        <button onclick="addDigit('3')">3</button>
+        <button onclick="addDigit('4')">4</button>
+        <button onclick="addDigit('5')">5</button>
+        <button onclick="addDigit('6')">6</button>
+        <button onclick="addDigit('7')">7</button>
+        <button onclick="addDigit('8')">8</button>
+        <button onclick="addDigit('9')">9</button>
+        <button onclick="backspace()">←</button>
+        <button onclick="addDigit('0')">0</button>
+        <button onclick="checkPassword()">OK</button>
+      </div>
+      <div id="feedback" class="feedback"></div>
+    </div>
+
+    <div class="polaroid">
+      <img src="img/foto_deles.jpg" alt="Foto do casal">
+      <div class="caption">Nosso começo 💞</div>
+    </div>
+  </div>
+
+  <script>
+    let input = "";
+
+    function formatDate(str) {
+      const parts = str.split('');
+      let formatted = '';
+      for (let i = 0; i < parts.length; i++) {
+        formatted += parts[i];
+        if (i === 1 || i === 3) formatted += '/';
+      }
+      return formatted.padEnd(10, '_');
+    }
+
+    function addDigit(digit) {
+      if (input.length < 8) {
+        input += digit;
+        document.getElementById('display').textContent = formatDate(input);
+      }
+    }
+
+    function backspace() {
+      input = input.slice(0, -1);
+      document.getElementById('display').textContent = formatDate(input);
+    }
+
+    function checkPassword() {
+  const correct = "09122023";
+  const feedback = document.getElementById('feedback');
+  if (input === correct) {
+    feedback.textContent = "Senha correta, amor! 💖";
+    feedback.style.color = "#4CAF50";
+
+    // Redireciona para outra página após 1 segundo
+    setTimeout(() => {
+      window.location.href = "menu.html"; // substitua pelo nome da sua página
+    }, 1000);
+  } else {
+    feedback.textContent = "VOCÊ ERROU DANIEL FOGOS!";
+    feedback.style.color = "#d32f2f";
+  }
+}
+  </script>
+</body>
+</html>

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz do Amor</title>
+  <style>
+    body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to bottom, #ff0000, #000000);
+  font-family: 'Segoe UI', sans-serif;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+}
+
+h1 {
+  margin-top: 40px;
+  font-size: 36px;
+  text-align: center;
+}
+
+.quiz-box {
+  background-color: #fff;
+  color: #333;
+  border-radius: 20px;
+  padding: 30px;
+  width: 90%;        /* responsivo */
+  max-width: 600px;  /* mantém limite no desktop */
+  box-sizing: border-box;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+  margin-bottom: 30px;
+}
+
+.question {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.option {
+  background-color: #f8f8f8;
+  border-radius: 10px;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 100%; /* garante largura total */
+  box-sizing: border-box;
+}
+
+.option:hover {
+  background-color: #ffe5e5;
+}
+
+.btn-group {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; /* permite quebrar em telas pequenas */
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #ff0000;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  flex: 1 1 30%; /* cresce e encolhe conforme o espaço */
+  min-width: 100px;
+}
+
+.btn:hover {
+  background-color: #cc0000;
+}
+
+.result {
+  font-size: 22px;
+  text-align: center;
+  margin-top: 20px;
+  white-space: pre-line;
+  word-wrap: break-word; /* evita overflow de texto em telas pequenas */
+}
+
+.home-button {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #fff;
+  color: #ff0000;
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  transition: transform 0.2s ease;
+  margin: 30px auto 0;
+}
+
+.home-button:hover {
+  transform: scale(1.1);
+  background-color: #ffe5e5;
+}
+
+/* Media Queries para telas menores */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 28px;
+  }
+
+  .quiz-box {
+    padding: 20px;
+  }
+
+  .question {
+    font-size: 18px;
+  }
+
+  .btn {
+    font-size: 14px;
+    padding: 8px 12px;
+    flex: 1 1 45%;
+  }
+
+  .option {
+    padding: 8px 12px;
+    font-size: 16px;
+  }
+
+  .result {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 360px) {
+  h1 {
+    font-size: 24px;
+  }
+
+  .quiz-box {
+    padding: 15px;
+  }
+
+  .option {
+    font-size: 14px;
+    padding: 6px 10px;
+  }
+
+  .btn {
+    font-size: 12px;
+    padding: 6px 10px;
+    flex: 1 1 100%;
+  }
+
+  .result {
+    font-size: 16px;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <h1>Quiz do Amor 💘</h1>
+  <div class="quiz-box" id="quizBox">
+    <div class="question" id="questionText"></div>
+    <div class="options" id="optionsList"></div>
+    <div class="btn-group">
+      <button class="btn" onclick="goBack()">Voltar</button>
+      <button class="btn" onclick="submitAnswer()">Responder</button>
+      <button class="btn" onclick="skipQuestion()">Avançar</button>
+    </div>
+    <div class="result" id="resultBox"></div>
+  </div>
+
+  <a href="menu.html" class="home-button">🏠</a>
+
+  <script>
+    const quiz = [
+      { question: "Qual foi o dia em que oficializamos o nosso namoro?", options: ["19 de dezembro de 2023", "09 de novembro de 2023", "29 de dezembro de 2023", "09 de dezembro de 2023"], answer: 3 },
+      { question: "Qual foi o lugar do nosso primeiro beijo?", options: ["No banheiro", "No meu condominio", "Na escola ", "Na quadra"], answer: 2 },
+      { question: "Qual apelido carinhoso eu te dou com mais frequência?", options: ["Mozão", "Amor", "Vida", "Príncipe"], answer: 3 },
+      { question: "Qual nome do primeiro ursinho que você me deu?", options: ["Rosinha", "Docinho", "Melzinha", "Florzinha"], answer: 3 },
+      { question: "Qual a nosso cantor favorito?", options: ["Orochi", "Cabelinho", "MC Maneirinho", "Chefin"], answer: 0 },
+      { question: "Qual foi o presente mais especial que você me deu?", options: ["Ursinho", "Buque de 15 anos", "Aliança", "Seu casaco"], answer: 3 },
+      { question: "Qual momento em que o sentimento mudou?", options: ["No patio da escola", "No meu condominio", "Primeira vez que a gente se abraçou", "No passeio da escola"], answer: 2 },
+      { question: "Em que mês a gente começou a conversar de verdade?", options: ["Novembro", "Dezembro", "Outubro", "Agosto"], answer: 0 },
+      { question: "Qual o nosso lugar favorito?", options: ["Seu quarto", "Praia", "Meu condominio", "Nossa antiga escola"], answer: 1 },
+      { question: "Qual foi a primeira vez que você me elogiou?", options: ["No seu aniversário", "No meu aniversário", "Apresentação da escola", "Nossa primeira conversa"], answer: 0 }
+    ];
+
+    const xingamentos = [
+      "Tá de sacanagem comigo? 😡","Amnésia bateu forte, né? 😂","Ta lerdão em 🤦",
+      "Desse jeito vou terminar contigo! 😤","Errar isso é crime contra o amor! 🚨",
+      "Merece dormir no sofá hoje! 🛋️","Até meu cachorro saberia essa 🐶",
+      "Tá precisando de memória nova! 🧠","Amor, tá passando vergonha... 😬","Errou feio Daniel Fogos! 🤣"
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+    let selectedOption = null;
+    let wrongAnswers = [];
+
+    function loadQuestion() {
+      const q = quiz[currentQuestion];
+      document.getElementById("questionText").textContent = q.question;
+      const optionsList = document.getElementById("optionsList");
+      optionsList.innerHTML = "";
+      selectedOption = null;
+
+      q.options.forEach((opt, index) => {
+        const div = document.createElement("div");
+        div.className = "option";
+        div.textContent = opt;
+        div.onclick = () => {
+          selectedOption = index;
+          document.querySelectorAll(".option").forEach(el => el.style.backgroundColor = "#f8f8f8");
+          div.style.backgroundColor = "#ffe5e5";
+        };
+        optionsList.appendChild(div);
+      });
+
+      document.getElementById("resultBox").textContent = "";
+    }
+
+    function submitAnswer() {
+      if (selectedOption === null) return;
+
+      const q = quiz[currentQuestion];
+
+      // corrigido: adiciona pontuação e gabarito corretamente
+      if (selectedOption === q.answer) {
+        score++;
+      } else {
+        wrongAnswers.push({
+          question: q.question,
+          yourAnswer: q.options[selectedOption],
+          correctAnswer: q.options[q.answer],
+          insult: xingamentos[Math.floor(Math.random() * xingamentos.length)]
+        });
+      }
+
+      currentQuestion++;
+      selectedOption = null; // resetar para próxima pergunta
+
+      if (currentQuestion < quiz.length) {
+        loadQuestion();
+      } else {
+        showResult();
+      }
+    }
+
+    function skipQuestion() {
+      currentQuestion++;
+      selectedOption = null; // resetar
+      if (currentQuestion < quiz.length) {
+        loadQuestion();
+      } else {
+        showResult();
+      }
+    }
+
+    function goBack() {
+      if (currentQuestion > 0) {
+        currentQuestion--;
+        loadQuestion();
+      }
+    }
+
+    function showResult() {
+      const resultBox = document.getElementById("resultBox");
+      let message = "";
+
+      if (score <= 3) message = "não me ama é?";
+      else if (score <= 6) message = "esqueceu dos nossos momentos?";
+      else if (score <= 9) message = "você foi bem, vida ❤️";
+      else message = "você é o amor da minha vida, príncipe! 💘";
+
+      let gabarito = "\n\n📖 GABARITO \n";
+      wrongAnswers.forEach((err, i) => {
+        gabarito += `\n${i+1}. ${err.question}\n ➡️ Sua resposta: ${err.yourAnswer}\n ✅ Correta: ${err.correctAnswer}\n ❌ ${err.insult}\n`;
+      });
+
+      resultBox.textContent = `Você acertou ${score} de ${quiz.length}.\n${message}${gabarito}`;
+    }
+
+    loadQuestion();
+  </script>
+</body>
+</html>

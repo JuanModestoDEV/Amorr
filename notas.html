@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Notas do Amor 💌</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, #ff0000, #000000);
+      font-family: 'Segoe UI', sans-serif;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    h1 {
+      margin-top: 30px;
+      font-size: 30px;
+      text-align: center;
+    }
+
+    .home-button {
+      position: fixed;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: #fff;
+      color: #ff0000;
+      font-size: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: transform 0.2s ease, background-color 0.2s ease;
+      z-index: 1000;
+    }
+
+    .home-button:hover {
+      transform: translateY(-50%) scale(1.1);
+      background-color: #ffe5e5;
+    }
+
+    .notes-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      padding: 40px 20px;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .note-box {
+      background: #fff;
+      color: #333;
+      border-radius: 20px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+      transition: transform 0.2s ease;
+      text-decoration: none;
+    }
+
+    .note-box:hover {
+      transform: scale(1.05);
+    }
+
+    .note-box h2 {
+      margin: 10px 0 0;
+      font-size: 20px;
+    }
+
+    .emoji {
+      font-size: 40px;
+    }
+
+    /* Centralizar apenas o quadrado "Meu Amor" */
+    .notes-container a:first-child {
+      grid-column: 1 / -1; /* ocupa toda a linha */
+      max-width: 300px;
+      margin: 0 auto; /* centraliza */
+    }
+
+    /* Responsividade */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 24px;
+      }
+
+      .home-button {
+        width: 50px;
+        height: 50px;
+        font-size: 22px;
+      }
+
+      .note-box {
+        padding: 15px;
+      }
+
+      .emoji {
+        font-size: 32px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="menu.html" class="home-button">🏠</a>
+
+  <h1>Notas do Amor 💌</h1>
+
+  <div class="notes-container">
+    <a href="meu-amor.html" class="note-box">
+      <div class="emoji">💖</div>
+      <h2>Meu Amor</h2>
+    </a>
+  </div>
+</body>
+</html>

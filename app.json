@@ -1,0 +1,58 @@
+{
+    "page": {
+      "layout": {
+        "type": "flex",
+        "direction": "row",
+        "justifyContent": "center",
+        "alignItems": "center",
+        "className": "page-layout"
+      },
+      "components": [
+        {
+          "type": "container",
+          "id": "keyboardSection",
+          "className": "keyboard-section",
+          "children": [
+            {
+              "type": "text",
+              "id": "statusMessage",
+              "content": "Digite a data que vocês começaram a namorar",
+              "className": "status-message"
+            },
+            {
+              "type": "input",
+              "id": "passwordInput",
+              "inputType": "tel",
+              "placeholder": "DD/MM/AAAA",
+              "className": "password-input"
+            },
+            {
+              "type": "button",
+              "id": "submitButton",
+              "text": "Verificar",
+              "onClick": "checkPassword",
+              "className": "submit-button"
+            },
+            {
+              "type": "text",
+              "id": "feedbackMessage",
+              "content": "",
+              "className": "feedback-message"
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "id": "couplePhoto",
+          "src": "foto_deles.jpg",
+          "alt": "Foto do casal com fundo branco antigo",
+          "className": "couple-photo"
+        }
+      ]
+    },
+    "logic": {
+      "correctPassword": "14/02/2021",
+      "checkPassword": "function() { const input = document.getElementById('passwordInput').value; const feedback = document.getElementById('feedbackMessage'); if (input === this.correctPassword) { feedback.textContent = 'Senha correta! 💖'; feedback.style.color = '#4CAF50'; } else { feedback.textContent = 'Senha incorreta. Tente novamente.'; feedback.style.color = '#d32f2f'; } }"
+    }
+  }
+  

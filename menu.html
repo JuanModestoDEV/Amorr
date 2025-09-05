@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Menu do nosso amor</title>
+  <style>
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom, #ff0000, #000000);
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+}
+
+h1 {
+  margin-top: 40px;
+  font-size: 36px;
+  color: #fff;
+  text-align: center;
+}
+
+.subtitle {
+  font-size: 18px;
+  color: #f8dada;
+  margin-bottom: 40px;
+  text-align: center;
+  max-width: 90%;
+}
+
+.menu {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* sempre 2 colunas */
+  gap: 20px;
+  width: 90%;
+  max-width: 600px; /* largura total do grid */
+  justify-items: center;
+}
+
+.card-link {
+  text-decoration: none;
+  width: 100%;
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: transform 0.2s;
+  color: inherit;
+  width: 100%;
+  box-sizing: border-box;
+  height: 200px; /* altura fixa para padronizar */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.emoji {
+  font-size: 40px;
+  color: #ff0000;
+  margin-bottom: 10px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #444;
+}
+
+.description {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Responsividade para telas pequenas */
+@media (max-width: 500px) {
+  .menu {
+    grid-template-columns: 1fr; /* 1 coluna em mobile */
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+    margin-bottom: 30px;
+  }
+
+  .emoji {
+    font-size: 30px;
+  }
+
+  .title {
+    font-size: 16px;
+  }
+
+  .description {
+    font-size: 13px;
+  }
+
+  .card {
+    height: 180px;
+  }
+}
+</style>
+</head>
+<body>
+  <h1>Menu do nosso amor</h1>
+  <div class="subtitle">Cada guia é um pedacinho da nossa história 💖</div>
+
+  <div class="menu">
+    <a href="historia.html" class="card-link">
+      <div class="card">
+        <div class="emoji">🗺️</div>
+        <div class="title">Nossa História</div>
+        <div class="description">Uma trilha dos momentos que construíram nosso amor</div>
+      </div>
+    </a>
+    <a href="calendario.html" class="card-link">
+      <div class="card">
+        <div class="emoji">📅</div>
+        <div class="title">Calendário do Amor</div>
+        <div class="description">Datas especiais que merecem ser celebradas</div>
+      </div>
+    </a>
+    <a href="quiz.html" class="card-link">
+      <div class="card">
+        <div class="emoji">❓</div>
+        <div class="title">Quiz do Amor</div>
+        <div class="description">Desafios divertidos para testar o quanto você sabe sobre nosso relacionamento</div>
+      </div>
+    </a>
+    <a href="notas.html" class="card-link">
+      <div class="card">
+        <div class="emoji">📝</div>
+        <div class="title">Notas do Amor</div>
+        <div class="description">Mensagens e recadinhos especiais para você, frases e textos para lermos.</div>
+      </div>
+    </a>
+  </div>
+</body>
+</html>
